@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/item_home_banner_iv"
+        android:layout_width="312dp"
+        android:layout_height="343dp"
+        android:layout_marginStart="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_home_banner_badge_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="7dp"
+        android:paddingStart="7dp"
+        android:paddingTop="1dp"
+        android:paddingEnd="7dp"
+        android:paddingBottom="1dp"
+        android:textColor="@color/shoppi_white"
+        app:layout_constraintBottom_toTopOf="@id/item_home_banner_title_tv"
+        app:layout_constraintStart_toStartOf="@id/item_home_banner_iv"
+        tools:background="@color/shoppi_grey_02"
+        tools:text="기획전" />
+
+    <TextView
+        android:id="@+id/item_home_banner_title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@id/item_home_banner_product_detail_v"
+        app:layout_constraintEnd_toEndOf="@id/item_home_banner_iv"
+        app:layout_constraintStart_toStartOf="@id/item_home_banner_iv"
+        tools:text="따스한 겨울\n준비하기" />
+
+    <View
+        android:id="@+id/item_home_banner_product_detail_v"
+        android:layout_width="288dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/background_white"
+        app:layout_constraintBottom_toBottomOf="@id/item_home_banner_iv"
+        app:layout_constraintEnd_toEndOf="@id/item_home_banner_iv"
+        app:layout_constraintStart_toStartOf="@id/item_home_banner_iv" />
+
+    <ImageView
+        android:id="@+id/item_home_banner_thumbnail_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@id/item_home_banner_product_detail_v"
+        app:layout_constraintTop_toTopOf="@id/item_home_banner_product_detail_v" />
+
+    <TextView
+        android:id="@+id/item_home_banner_brand_label_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/item_home_banner_product_detail_v"
+        app:layout_constraintStart_toEndOf="@id/item_home_banner_thumbnail_iv"
+        app:layout_constraintTop_toTopOf="@id/item_home_banner_product_detail_v"
+        tools:text="twg.official" />
+
+    <TextView
+        android:id="@+id/item_home_banner_product_label_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/item_home_banner_brand_label_tv"
+        app:layout_constraintStart_toStartOf="@id/item_home_banner_brand_label_tv"
+        app:layout_constraintTop_toBottomOf="@id/item_home_banner_brand_label_tv"
+        tools:text="캐시미어 100% 터틀넥 스웨터" />
+
+    <TextView
+        android:id="@+id/item_home_banner_product_discount_label_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="@id/item_home_banner_product_label_tv"
+        app:layout_constraintTop_toBottomOf="@id/item_home_banner_product_label_tv"
+        tools:text="9%" />
+
+    <TextView
+        android:id="@+id/item_home_banner_product_discount_price_label_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        app:layout_constraintBottom_toBottomOf="@id/item_home_banner_product_discount_label_tv"
+        app:layout_constraintStart_toEndOf="@id/item_home_banner_product_discount_label_tv"
+        tools:text="89,000원" />
+
+    <TextView
+        android:id="@+id/item_home_banner_product_price_label_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/item_home_banner_product_discount_price_label_tv"
+        app:layout_constraintStart_toEndOf="@id/item_home_banner_product_discount_price_label_tv"
+        tools:text="100,000원" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
