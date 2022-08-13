@@ -1,4 +1,4 @@
-package com.joy.shoppi.repository
+package com.joy.shoppi.repository.home
 
 import com.google.gson.Gson
 import com.joy.shoppi.AssetLoader
