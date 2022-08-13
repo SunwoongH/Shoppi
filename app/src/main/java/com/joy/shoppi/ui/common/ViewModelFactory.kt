@@ -4,17 +4,27 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.joy.shoppi.AssetLoader
-import com.joy.shoppi.repository.HomeAssetDataSource
-import com.joy.shoppi.repository.HomeRepository
+import com.joy.shoppi.network.ApiClient
+import com.joy.shoppi.repository.category.CategoryRemoteDataSource
+import com.joy.shoppi.repository.category.CategoryRepository
+import com.joy.shoppi.repository.home.HomeAssetDataSource
+import com.joy.shoppi.repository.home.HomeRepository
+import com.joy.shoppi.ui.category.CategoryViewModel
 import com.joy.shoppi.ui.home.HomeViewModel
-import java.lang.IllegalArgumentException
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel(HomeRepository(HomeAssetDataSource(AssetLoader(context)))) as T
-        } else {
-            throw IllegalArgumentException("Failed to create ViewModel: ${modelClass.name}")
+        return when {
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(HomeRepository(HomeAssetDataSource(AssetLoader(context)))) as T
+            }
+            modelClass.isAssignableFrom(CategoryViewModel::class.java) -> {
+                CategoryViewModel(CategoryRepository(CategoryRemoteDataSource(ApiClient.create()))) as T
+            }
+            else -> {
+                throw IllegalArgumentException("Failed to create ViewModel: ${modelClass.name}")
+            }
         }
     }
 }
