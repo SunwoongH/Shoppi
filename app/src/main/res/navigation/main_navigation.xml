@@ -7,14 +7,14 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.joy.shoppi.ui.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.joy.shoppi.ui.CategoryFragment"
+        android:name="com.joy.shoppi.ui.category.CategoryFragment"
         android:label="CategoryFragment" />
     <fragment
         android:id="@+id/cartFragment"
