@@ -1,15 +1,14 @@
 package com.joy.shoppi.ui.category
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.joy.shoppi.databinding.ItemCategoryBinding
 import com.joy.shoppi.model.Category
+import com.joy.shoppi.ui.common.CategoryDiffCallback
 
-class CategoryAdapter :
+class CategoryAdapter(private val viewModel: CategoryViewModel) :
     ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(CategoryDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -22,23 +21,13 @@ class CategoryAdapter :
         holder.bind(getItem(position))
     }
 
-    class CategoryViewHolder(private val binding: ItemCategoryBinding) :
+    inner class CategoryViewHolder(private val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(category: Category) {
+            binding.viewModel = viewModel
             binding.category = category
             binding.executePendingBindings()
         }
-    }
-}
-
-class CategoryDiffCallback : DiffUtil.ItemCallback<Category>() {
-
-    override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
-        return oldItem.categoryId == newItem.categoryId
-    }
-
-    override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
-        return oldItem == newItem
     }
 }
