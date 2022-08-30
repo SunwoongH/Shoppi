@@ -4,9 +4,11 @@
     <string name="title_product_detail_image">상품설명</string>
     <string name="description_product_detail_image">상품 상세 이미지</string>
     <string name="label_category">카테고리</string>
-    <string name="label_home_icon">홈</string>
-    <string name="label_cart_icon">장바구니</string>
+    <string name="label_home">홈</string>
+    <string name="label_cart">장바구니</string>
     <string name="unit_discount_rate">%d%%</string>
     <string name="unit_discount_currency">%s원</string>
     <string name="label_category_new">NEW</string>
+    <string name="label_add_cart">장바구니 담기</string>
+    <string name="label_product_price_description">쿠폰 적용가</string>
 </resources>
