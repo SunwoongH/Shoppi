@@ -80,6 +80,17 @@
                     app:tabGravity="center"
                     app:tabIndicatorHeight="0dp" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/home_promotions_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/home_banner_vp" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
