@@ -32,16 +32,25 @@ class CategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val categoryAdapter = CategoryAdapter(viewModel)
-        binding.categoryRv.adapter = categoryAdapter
-        viewModel.items.observe(
-            viewLifecycleOwner
-        ) {
-            categoryAdapter.submitList(it)
-        }
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.openCategoryEvent.observe(viewLifecycleOwner, EventObserver {
-            openCategoryDetail(it.categoryId, it.label)
+        setCategoryAdapter()
+        setNavigation()
+    }
+
+    private fun setCategoryAdapter() {
+        binding.categoryRv.adapter = CategoryAdapter(viewModel).apply {
+            viewModel.categories.observe(
+                viewLifecycleOwner
+            ) { categories ->
+                submitList(categories)
+            }
+        }
+    }
+
+    private fun setNavigation() {
+        viewModel.openCategoryEvent.observe(viewLifecycleOwner, EventObserver { category ->
+            openCategoryDetail(category.categoryId, category.label)
         })
     }
 

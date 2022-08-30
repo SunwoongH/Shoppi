@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import com.joy.shoppi.common.KEY_CATEGORY_LABEL
 import com.joy.shoppi.databinding.FragmentCategoryDetailBinding
@@ -29,16 +30,17 @@ class CategoryDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.lifecycleOwner = viewLifecycleOwner
-        setToolbar()
-        setListAdapter()
+
+        setView()
+        setCategoryDetailAdapter()
+        setNavigation()
     }
 
-    private fun setToolbar() {
-        val categoryLabel = requireArguments().getString(KEY_CATEGORY_LABEL)
-        binding.categoryDetailTb.title = categoryLabel
+    private fun setView() {
+        binding.categoryDetailTb.title = requireArguments().getString(KEY_CATEGORY_LABEL)
     }
 
-    private fun setListAdapter() {
+    private fun setCategoryDetailAdapter() {
         val topSellingSectionAdapter = CategoryTopSellingSectionAdapter()
         val titleAdapter = CategorySectionTitleAdapter()
         val promotionAdapter = CategoryPromotionAdapter()
@@ -52,6 +54,12 @@ class CategoryDetailFragment : Fragment() {
         viewModel.promotions.observe(viewLifecycleOwner) { promotions ->
             titleAdapter.submitList(listOf(promotions.title))
             promotionAdapter.submitList(promotions.items)
+        }
+    }
+
+    private fun setNavigation() {
+        binding.categoryDetailTb.setNavigationOnClickListener {
+            findNavController().navigateUp()
         }
     }
 }

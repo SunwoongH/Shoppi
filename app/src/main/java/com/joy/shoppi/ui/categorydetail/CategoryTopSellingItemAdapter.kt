@@ -29,7 +29,6 @@ class CategoryTopSellingItemAdapter :
         holder.bind(getItem(position))
     }
 
-
     class CategoryTopSellingItemViewHolder(private val binding: ItemCategoryTopSellingBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

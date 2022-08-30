@@ -1,6 +1,5 @@
 package com.joy.shoppi.ui.categorydetail
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -26,6 +25,7 @@ class CategoryPromotionAdapter :
 
     class CategoryPromotionViewHolder(private val binding: ItemCategoryPromotionBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(product: Product) {
             binding.product = product
             binding.executePendingBindings()

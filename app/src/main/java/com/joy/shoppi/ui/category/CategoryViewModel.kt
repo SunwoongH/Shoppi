@@ -11,24 +11,24 @@ import kotlinx.coroutines.launch
 
 class CategoryViewModel(private val categoryRepository: CategoryRepository) : ViewModel() {
 
-    private val _items = MutableLiveData<List<Category>>()
-    val items: LiveData<List<Category>> = _items
+    private val _categories = MutableLiveData<List<Category>>()
+    val categories: LiveData<List<Category>> = _categories
 
     private val _openCategoryEvent = MutableLiveData<Event<Category>>()
     val openCategoryEvent: LiveData<Event<Category>> = _openCategoryEvent
 
     init {
-        loadCategory()
+        getCategories()
     }
 
     fun openCategoryDetail(category: Category) {
         _openCategoryEvent.value = Event(category)
     }
 
-    private fun loadCategory() {
+    private fun getCategories() {
         viewModelScope.launch {
             val categories = categoryRepository.getCategories()
-            _items.value = categories
+            _categories.value = categories
         }
     }
 }

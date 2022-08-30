@@ -19,10 +19,10 @@ class CategoryDetailViewModel(private val categoryDetailRepository: CategoryDeta
     val promotions: LiveData<Promotion> = _promotions
 
     init {
-        loadCategoryDetail()
+        getCategoryDetail()
     }
 
-    private fun loadCategoryDetail() {
+    private fun getCategoryDetail() {
         viewModelScope.launch {
             val categoryDetail = categoryDetailRepository.getCategoryDetail()
             _topSelling.value = categoryDetail.topSelling
