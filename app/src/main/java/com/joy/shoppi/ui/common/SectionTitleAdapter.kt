@@ -1,5 +1,4 @@
-package com.joy.shoppi.ui.categorydetail
-
+package com.joy.shoppi.ui.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,24 +8,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.joy.shoppi.databinding.ItemTitleBinding
 import com.joy.shoppi.model.Title
 
-class CategorySectionTitleAdapter :
-    ListAdapter<Title, CategorySectionTitleAdapter.CategorySectionTitleViewHolder>(
-        CategorySectionTitleDiffCallback()
+class SectionTitleAdapter :
+    ListAdapter<Title, SectionTitleAdapter.SectionTitleViewHolder>(
+        SectionTitleDiffCallback()
     ) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): CategorySectionTitleViewHolder {
+    ): SectionTitleViewHolder {
         val binding = ItemTitleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CategorySectionTitleViewHolder(binding)
+        return SectionTitleViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CategorySectionTitleViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SectionTitleViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class CategorySectionTitleViewHolder(private val binding: ItemTitleBinding) :
+    class SectionTitleViewHolder(private val binding: ItemTitleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(title: Title) {
@@ -36,7 +35,7 @@ class CategorySectionTitleAdapter :
     }
 }
 
-class CategorySectionTitleDiffCallback : DiffUtil.ItemCallback<Title>() {
+class SectionTitleDiffCallback : DiffUtil.ItemCallback<Title>() {
 
     override fun areItemsTheSame(oldItem: Title, newItem: Title): Boolean {
         return oldItem.text == newItem.text

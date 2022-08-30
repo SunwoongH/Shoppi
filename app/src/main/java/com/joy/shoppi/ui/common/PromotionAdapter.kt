@@ -1,39 +1,40 @@
-package com.joy.shoppi.ui.categorydetail
+package com.joy.shoppi.ui.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.joy.shoppi.databinding.ItemCategoryPromotionBinding
+import com.joy.shoppi.databinding.ItemPromotionBinding
 import com.joy.shoppi.model.Product
 
-class CategoryPromotionAdapter :
-    ListAdapter<Product, CategoryPromotionAdapter.CategoryPromotionViewHolder>(
-        CategoryPromotionDiffCallBack()
+class PromotionAdapter(private val clickListener: ProductClickListener) :
+    ListAdapter<Product, PromotionAdapter.PromotionViewHolder>(
+        PromotionDiffCallBack()
     ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryPromotionViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PromotionViewHolder {
         val binding =
-            ItemCategoryPromotionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CategoryPromotionViewHolder(binding)
+            ItemPromotionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PromotionViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CategoryPromotionViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PromotionViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class CategoryPromotionViewHolder(private val binding: ItemCategoryPromotionBinding) :
+    inner class PromotionViewHolder(private val binding: ItemPromotionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
+            binding.clickListener = clickListener
             binding.product = product
             binding.executePendingBindings()
         }
     }
 }
 
-class CategoryPromotionDiffCallBack : DiffUtil.ItemCallback<Product>() {
+class PromotionDiffCallBack : DiffUtil.ItemCallback<Product>() {
 
     override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
         return oldItem.productId == newItem.productId
