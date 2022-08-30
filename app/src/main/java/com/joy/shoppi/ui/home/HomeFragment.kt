@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
 import com.joy.shoppi.R
+import com.joy.shoppi.common.KEY_PRODUCT_ID
 import com.joy.shoppi.databinding.FragmentHomeBinding
+import com.joy.shoppi.ui.common.EventObserver
 import com.joy.shoppi.ui.common.ViewModelFactory
 
 class HomeFragment : Fragment() {
@@ -29,11 +33,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.lifecycleOwner = viewLifecycleOwner
-        setToolbar()
-        setTopBanners()
+        setView()
+        setNavigation()
+        setHomeBannerAdapter()
     }
 
-    private fun setToolbar() {
+    private fun setView() {
         viewModel.title.observe(
             viewLifecycleOwner
         ) { title ->
@@ -41,9 +46,17 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setTopBanners() {
+    private fun setNavigation() {
+        viewModel.openProductEvent.observe(
+            viewLifecycleOwner, EventObserver { productId ->
+                openProductDetail(productId)
+            }
+        )
+    }
+
+    private fun setHomeBannerAdapter() {
         with(binding.homeBannerVp) {
-            adapter = HomeBannerAdapter().apply {
+            adapter = HomeBannerAdapter(viewModel).apply {
                 viewModel.topBanners.observe(
                     viewLifecycleOwner
                 ) { banners ->
@@ -53,17 +66,22 @@ class HomeFragment : Fragment() {
             val pageWidth = resources.getDimension(R.dimen.viewpager_item_width)
             val pageMargin = resources.getDimension(R.dimen.viewpager_item_margin)
             val screenWidth = resources.displayMetrics.widthPixels
-            val offset = screenWidth - pageWidth - pageMargin
-
+            val offset = screenWidth - pageMargin - pageWidth
             offscreenPageLimit = 3
             setPageTransformer { page, position ->
                 page.translationX = position * -offset
             }
             TabLayoutMediator(
                 binding.homeBannerIndicatorTl, this
-            ) { tab, position ->
-
-            }.attach()
+            ) { _, _ -> TODO("Not yet implemented") }
         }
+    }
+
+    private fun openProductDetail(productId: String) {
+        findNavController().navigate(
+            R.id.action_homeFragment_to_productDetailFragment, bundleOf(
+                KEY_PRODUCT_ID to productId
+            )
+        )
     }
 }

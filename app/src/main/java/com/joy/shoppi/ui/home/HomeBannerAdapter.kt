@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.joy.shoppi.databinding.ItemHomeBannerBinding
 import com.joy.shoppi.model.Banner
 
-class HomeBannerAdapter :
+class HomeBannerAdapter(private val viewModel: HomeViewModel) :
     ListAdapter<Banner, HomeBannerAdapter.HomeBannerViewHolder>(BannerDiffCallback()) {
 
     private lateinit var binding: ItemHomeBannerBinding
@@ -22,10 +22,11 @@ class HomeBannerAdapter :
         holder.bind(getItem(position))
     }
 
-    class HomeBannerViewHolder(private val binding: ItemHomeBannerBinding) :
+    inner class HomeBannerViewHolder(private val binding: ItemHomeBannerBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(banner: Banner) {
+            binding.viewModel = viewModel
             binding.banner = banner
             binding.executePendingBindings()
         }
