@@ -8,14 +8,14 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ConcatAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.joy.shoppi.R
 import com.joy.shoppi.common.KEY_PRODUCT_ID
 import com.joy.shoppi.databinding.FragmentHomeBinding
-import com.joy.shoppi.ui.common.EventObserver
-import com.joy.shoppi.ui.common.ViewModelFactory
+import com.joy.shoppi.ui.common.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), ProductClickListener {
 
     private val viewModel: HomeViewModel by viewModels { ViewModelFactory(requireContext()) }
     private lateinit var binding: FragmentHomeBinding
@@ -33,9 +33,19 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.lifecycleOwner = viewLifecycleOwner
+
         setView()
-        setNavigation()
         setHomeBannerAdapter()
+        setPromotionsAdapter()
+        setNavigation()
+    }
+
+    override fun onProductClick(productId: String) {
+        findNavController().navigate(
+            R.id.action_homeFragment_to_productDetailFragment, bundleOf(
+                KEY_PRODUCT_ID to "desk-1" // 임시 데이터 고정
+            )
+        )
     }
 
     private fun setView() {
@@ -44,14 +54,6 @@ class HomeFragment : Fragment() {
         ) { title ->
             binding.title = title
         }
-    }
-
-    private fun setNavigation() {
-        viewModel.openProductEvent.observe(
-            viewLifecycleOwner, EventObserver { productId ->
-                openProductDetail(productId)
-            }
-        )
     }
 
     private fun setHomeBannerAdapter() {
@@ -75,6 +77,26 @@ class HomeFragment : Fragment() {
                 binding.homeBannerIndicatorTl, this
             ) { _, _ -> TODO("Not yet implemented") }
         }
+    }
+
+    private fun setPromotionsAdapter() {
+        val titleAdapter = SectionTitleAdapter()
+        val promotionAdapter = PromotionAdapter(this)
+        binding.homePromotionsRv.adapter = ConcatAdapter(titleAdapter, promotionAdapter)
+        viewModel.promotions.observe(
+            viewLifecycleOwner
+        ) { promotion ->
+            titleAdapter.submitList(listOf(promotion.title))
+            promotionAdapter.submitList(promotion.items)
+        }
+    }
+
+    private fun setNavigation() {
+        viewModel.openProductEvent.observe(
+            viewLifecycleOwner, EventObserver { productId ->
+                openProductDetail(productId)
+            }
+        )
     }
 
     private fun openProductDetail(productId: String) {
