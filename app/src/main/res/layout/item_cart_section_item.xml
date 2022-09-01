@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cartSectionItem"
+            type="com.joy.shoppi.model.CartSectionItem" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/shoppi_white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <CheckBox
+                android:id="@+id/cart_section_item_check_cb"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/selector_checkbox"
+                android:button="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:checked="true" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/cart_section_item_thumbnail_iv"
+                imageUrl="@{cartSectionItem.thumbnailImageUrl}"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/cart_section_item_check_cb"
+                app:layout_constraintTop_toTopOf="@id/cart_section_item_check_cb"
+                app:shapeAppearanceOverlay="@style/Circle"
+                tools:src="@drawable/ic_delete" />
+
+            <TextView
+                android:id="@+id/cart_section_item_label_tv"
+                style="@style/TextCaption1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="@{cartSectionItem.label}"
+                app:layout_constraintEnd_toStartOf="@id/cart_section_item_delete_iv"
+                app:layout_constraintStart_toEndOf="@id/cart_section_item_thumbnail_iv"
+                app:layout_constraintTop_toTopOf="@id/cart_section_item_thumbnail_iv"
+                tools:text="캐시미어 100% 터틀넥 스웨터" />
+
+            <ImageButton
+                android:id="@+id/cart_section_item_delete_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cart_section_item_option_tv"
+                style="@style/TextCaption1.Grey01"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@{cartSectionItem.type}"
+                app:layout_constraintEnd_toEndOf="@id/cart_section_item_label_tv"
+                app:layout_constraintStart_toStartOf="@id/cart_section_item_label_tv"
+                app:layout_constraintTop_toBottomOf="@id/cart_section_item_label_tv"
+                tools:text="Free" />
+
+            <ImageButton
+                android:id="@+id/cart_section_item_minus_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/ic_minus"
+                app:layout_constraintStart_toStartOf="@id/cart_section_item_option_tv"
+                app:layout_constraintTop_toBottomOf="@id/cart_section_item_option_tv" />
+
+            <TextView
+                android:id="@+id/cart_section_item_count_tv"
+                style="@style/TextSubtitle2.Black02.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{cartSectionItem.amount}"
+                app:layout_constraintBottom_toBottomOf="@id/cart_section_item_minus_iv"
+                app:layout_constraintStart_toEndOf="@id/cart_section_item_minus_iv"
+                app:layout_constraintTop_toTopOf="@id/cart_section_item_minus_iv"
+                tools:text="1" />
+
+            <ImageButton
+                android:id="@+id/cart_section_item_plus_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/ic_plus"
+                app:layout_constraintBottom_toBottomOf="@id/cart_section_item_count_tv"
+                app:layout_constraintStart_toEndOf="@id/cart_section_item_count_tv"
+                app:layout_constraintTop_toTopOf="@id/cart_section_item_count_tv" />
+
+            <TextView
+                style="@style/TextSubtitle1.Bold"
+                priceAmount="@{cartSectionItem.price}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/cart_section_item_count_tv"
+                tools:text="81,000원" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>
