@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.joy.shoppi.AssetLoader
 import com.joy.shoppi.ServiceLocator
+import com.joy.shoppi.repository.cart.CartLocalDataSource
+import com.joy.shoppi.repository.cart.CartRepository
 import com.joy.shoppi.repository.category.CategoryRemoteDataSource
 import com.joy.shoppi.repository.category.CategoryRepository
 import com.joy.shoppi.repository.categorydetail.CategoryDetailRemoteDataSource
@@ -13,6 +15,7 @@ import com.joy.shoppi.repository.home.HomeAssetDataSource
 import com.joy.shoppi.repository.home.HomeRepository
 import com.joy.shoppi.repository.productdetail.ProductDetailRemoteDataSource
 import com.joy.shoppi.repository.productdetail.ProductDetailRepository
+import com.joy.shoppi.ui.cart.CartViewModel
 import com.joy.shoppi.ui.category.CategoryViewModel
 import com.joy.shoppi.ui.categorydetail.CategoryDetailViewModel
 import com.joy.shoppi.ui.home.HomeViewModel
@@ -41,6 +44,22 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
                 ProductDetailViewModel(
                     ProductDetailRepository(
                         ProductDetailRemoteDataSource(ServiceLocator.provideApiClient())
+                    ),
+                    CartRepository(
+                        CartLocalDataSource(
+                            ServiceLocator.provideDatabase(context).cartSectionItemDao()
+                        )
+                    )
+                ) as T
+            }
+            modelClass.isAssignableFrom(CartViewModel::class.java) -> {
+                CartViewModel(
+                    CartRepository(
+                        CartLocalDataSource(
+                            ServiceLocator.provideDatabase(
+                                context
+                            ).cartSectionItemDao()
+                        )
                     )
                 ) as T
             }
